@@ -9,8 +9,7 @@ BNode::BNode(string key, string author, string text) {
     _parent = nullptr;
     createTextTree(text);
 }
-BNode::~BNode() {
-}
+BNode::~BNode() {}
 
 void BNode::createTextTree(string text) {
     istringstream iss(text);

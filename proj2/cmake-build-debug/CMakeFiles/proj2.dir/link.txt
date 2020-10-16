@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/proj2.dir/bNode.cpp.o CMakeFiles/proj2.dir/bookTree.cpp.o CMakeFiles/proj2.dir/main.cpp.o CMakeFiles/proj2.dir/mytest.cpp.o CMakeFiles/proj2.dir/wordTree.cpp.o  -o proj2 

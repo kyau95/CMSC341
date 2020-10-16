@@ -45,11 +45,29 @@ Node *WordTree::find(const string &element) {
 }
 
 Node *WordTree::leftRotation(Node *aNode) {
-    return nullptr;
+    Node *y = aNode->_right;
+    Node *temp = y->_left;
+
+    y->_left = aNode;
+    aNode->_right = temp;
+
+    updateHeight(aNode);
+    updateHeight(y);
+
+    return y;
 }
 
 Node *WordTree::rightRotation(Node *aNode) {
-    return nullptr;
+    Node *x = aNode->_left;
+    Node *temp = x->_right;
+
+    x->_right = aNode;
+    aNode->_left = temp;
+
+    updateHeight(aNode);
+    updateHeight(x);
+
+    return x;
 }
 
 int WordTree::checkBalance(Node *aNode) {
@@ -68,13 +86,13 @@ int WordTree::checkBalance(Node *aNode) {
 }
 
 Node *WordTree::reBalance(Node *aNode) {
-
+    
     return nullptr;
 }
 
 void WordTree::insert(const string &element) {
     if (_root) {
-
+        insert(element, _root);
     }
     else {
         _root = new Node(element);
@@ -83,12 +101,41 @@ void WordTree::insert(const string &element) {
 }
 
 Node *WordTree::insert(const string &element, Node *&aNode) {
-    
+    if (element == aNode->_value) {
+        ++aNode->_count;
+    }
+    else if (element < aNode->_value) {
+        if (aNode->_left) {
+            aNode->_left->_parent = insert(element, aNode->_left);
+        }
+        else {
+            aNode->_left = new Node(element);
+            aNode->_left->_parent = aNode;
+        }
+    }
+    else {
+        if (aNode->_right) {
+            aNode->_right->_parent = insert(element, aNode->_right);
+        }
+        else {
+            aNode->_right = new Node(element);
+            aNode->_right->_parent = aNode;
+        }
+    }
+
+    // Need to check for rebalancing for each potential cases, LL, RR, LR, RL
+    int balance_factor = checkBalance(aNode);
+
     return aNode;
 }
 
 int WordTree::searchCount(string word) {
-    return 0;
+    if (_root) {
+        return searchCountHelp(_root, word);
+    }
+    else {
+        return 0;
+    }
 }
 
 int WordTree::searchCountHelp(Node *aNode, string word, int counter) {
@@ -96,16 +143,35 @@ int WordTree::searchCountHelp(Node *aNode, string word, int counter) {
 }
 
 int WordTree::getRootHeight() {
-    return 0;
+    return _root->_height;
 }
 
 int WordTree::getNodeHeight(string word) {
-    
-    return -1;
+    if (_root) {
+        return getNodeHeightHelp(_root, word);
+    }
+    else {
+        return 0;
+    }
 }
 
 int WordTree::getNodeHeightHelp(Node *aNode, string word) {
-    return 0;
+    if (word < aNode->_value) {
+        if (aNode->_left) {
+            return getNodeHeightHelp(aNode->_left, word);
+        }
+        else {
+            return -1;
+        }
+    }
+    else {
+        if (aNode->_right) {
+            return getNodeHeightHelp(aNode->_right, word);
+        }
+        else {
+            return -1;
+        }
+    }
 }
 
 // ========================= NO TOUCHY =========================

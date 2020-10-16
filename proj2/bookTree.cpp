@@ -20,33 +20,6 @@ bool BookTree::insert(string key, string author, string text) {
 void BookTree::clear(BNode *root) {
 }
 
-void BookTree::inorderHelp(BNode *root, bool verbose) const {
-    /***********************************
-     *      Do not modify
-     * ********************************/
-    if (root != nullptr) {
-        if (verbose) {
-            cout << "(";
-            inorderHelp(root->_left, verbose);
-            cout << root->_key << ":" << root->_author;
-            root->_tree.dump();
-            inorderHelp(root->_right, verbose);
-            cout << ")";
-        } else {
-            inorderHelp(root->_left, verbose);
-            cout << root->_key;
-            inorderHelp(root->_right, verbose);
-        }
-    }
-}
-
-void BookTree::dump(bool verbose) const {
-    /***********************************
-     *      Do not modify
-     * ********************************/
-    inorderHelp(_root, verbose);
-}
-
 int BookTree::findFrequency(string title, string word) {
     return 0;
 }
@@ -74,6 +47,7 @@ string BookTree::getRootKey() {
     return _root->_key;
 }
 
+// ========================= NO TOUCHY =========================
 void BookTree::loadData(string dataFile) {
     /***********************************
      *      This function is implemented
@@ -122,4 +96,31 @@ void BookTree::loadData(string dataFile) {
         //move to info for the next title
         s.erase(0, pos + titleDelimiter.length() + 1);
     }
+}
+
+void BookTree::inorderHelp(BNode *root, bool verbose) const {
+    /***********************************
+     *      Do not modify
+     * ********************************/
+    if (root != nullptr) {
+        if (verbose) {
+            cout << "(";
+            inorderHelp(root->_left, verbose);
+            cout << root->_key << ":" << root->_author;
+            root->_tree.dump();
+            inorderHelp(root->_right, verbose);
+            cout << ")";
+        } else {
+            inorderHelp(root->_left, verbose);
+            cout << root->_key;
+            inorderHelp(root->_right, verbose);
+        }
+    }
+}
+
+void BookTree::dump(bool verbose) const {
+    /***********************************
+     *      Do not modify
+     * ********************************/
+    inorderHelp(_root, verbose);
 }
