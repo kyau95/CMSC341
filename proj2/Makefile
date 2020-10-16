@@ -6,11 +6,11 @@ CFLAGS = -g -std=c++14 -Werror -O2
 
 all: proj2
 
-test: maketest
+proj2: bNode.o bookTree.o wordTree.o
+	$(CC) $(CFLAGS) bNode.o bookTree.o wordTree.o main.cpp -o proj2
 
-proj2: bNode.o bookTree.o wordTree.o main.cpp
-
-maketest: bNode.o bookTree.o wordTree.o mytest.cpp
+maketest: bNode.o bookTree.o wordTree.o
+	$(CC) $(CFLAGS) bNode.o bookTree.o wordTree.o mytest.cpp -o proj2
 
 bNode.o: bNode.cpp bNode.h
 	$(CC) $(CFLAGS) -c bNode.cpp

@@ -43,9 +43,26 @@ void WordTree::inOrder(Node *aNode, std::ostream &ostr) {
 }
 
 Node *WordTree::find(Node *aNode, const string &element) {
-    return nullptr;
+    if (aNode->_value == element) {
+        return aNode; 
+    }
+    else {
+        if (aNode->_left) {
+            return find(aNode->_left, element);
+        }
+        if (aNode->_right) {
+            return find(aNode->_right, element);
+        }
+    }
 }
+
 Node *WordTree::find(const string &element) {
+    if (_root) {
+        return find(_root, element);
+    }
+    else {
+        return nullptr;
+    }
 }
 
 Node *WordTree::leftRotation(Node *aNode) {
