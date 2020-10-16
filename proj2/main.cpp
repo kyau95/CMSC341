@@ -21,11 +21,14 @@ int main() {
     //          << endl;
     //     aTree.dumpTitle("the wonderful wizard of oz");
     //     cout << endl;
-    WordTree w_tree;
-    string test_arr[]{"apple", "bird", "tree", "fire", "bird", "orange", "banana", "pear", "apple", "tire"};
-    for (int i = 0; i < 10; ++i) {
-        w_tree.insert(test_arr[i]);
-    }
+    // WordTree w_tree;
+    // string test_arr[]{"apple", "bird", "tree", "fire", "bird", "orange", "banana", "pear", "apple", "tire"};
+    // for (int i = 0; i < 10; ++i) {
+    //     w_tree.insert(test_arr[i]);
+    // }
     
+    Node *a = new Node("");
+
+
     return 0;
 }

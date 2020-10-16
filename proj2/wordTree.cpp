@@ -22,6 +22,7 @@ void WordTree::updateHeight(Node *aNode) {
 }
 
 void WordTree::clearTree(Node *aNode) {
+    // Recursively deletes down the tree
     if (aNode) {
         clearTree(aNode->_left);
         clearTree(aNode->_right);
@@ -29,31 +30,9 @@ void WordTree::clearTree(Node *aNode) {
     }
 }
 
-void WordTree::inOrder(Node *aNode, std::ostream &ostr) {
-    /***********************************
-     *      Do not modify
-     * ********************************/
-    if (aNode != nullptr) {
-        ostr << "[";
-        inOrder(aNode->_left, ostr);
-        ostr << aNode->_value << ":" << aNode->_count << ":" << aNode->_height;
-        inOrder(aNode->_right, ostr);
-        ostr << "]";
-    }
-}
-
 Node *WordTree::find(Node *aNode, const string &element) {
-    if (aNode->_value == element) {
-        return aNode; 
-    }
-    else {
-        if (aNode->_left) {
-            return find(aNode->_left, element);
-        }
-        if (aNode->_right) {
-            return find(aNode->_right, element);
-        }
-    }
+    
+    return nullptr;
 }
 
 Node *WordTree::find(const string &element) {
@@ -89,21 +68,23 @@ int WordTree::checkBalance(Node *aNode) {
 }
 
 Node *WordTree::reBalance(Node *aNode) {
+
     return nullptr;
 }
 
 void WordTree::insert(const string &element) {
+    if (_root) {
+
+    }
+    else {
+        _root = new Node(element);
+        _root->_count = 1;
+    }
 }
 
 Node *WordTree::insert(const string &element, Node *&aNode) {
-    return nullptr;
-}
-
-void WordTree::dump(std::ostream &ostr) {
-    /***********************************
-     *      Do not modify
-     * ********************************/
-    inOrder(_root, ostr);
+    
+    return aNode;
 }
 
 int WordTree::searchCount(string word) {
@@ -125,4 +106,25 @@ int WordTree::getNodeHeight(string word) {
 
 int WordTree::getNodeHeightHelp(Node *aNode, string word) {
     return 0;
+}
+
+// ========================= NO TOUCHY =========================
+void WordTree::inOrder(Node *aNode, std::ostream &ostr) {
+    /***********************************
+     *      Do not modify
+     * ********************************/
+    if (aNode != nullptr) {
+        ostr << "[";
+        inOrder(aNode->_left, ostr);
+        ostr << aNode->_value << ":" << aNode->_count << ":" << aNode->_height;
+        inOrder(aNode->_right, ostr);
+        ostr << "]";
+    }
+}
+
+void WordTree::dump(std::ostream &ostr) {
+    /***********************************
+     *      Do not modify
+     * ********************************/
+    inOrder(_root, ostr);
 }

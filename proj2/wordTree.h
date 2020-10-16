@@ -55,10 +55,9 @@ public:
 private:
     Node *_root;
     Node *insert(const string &element, Node *&aNode);  //insert helper function
-    void inOrder(Node *aNode, std::ostream &ostr);
-    ;                                                //inOrder helper
-    Node *find(Node *aNode, const string &element);  //find helper
-    void clearTree(Node *aNode);                     //helper called by destructor
+    void inOrder(Node *aNode, std::ostream &ostr);      //inOrder helper
+    Node *find(Node *aNode, const string &element);     //find helper
+    void clearTree(Node *aNode);                        //helper called by destructor
     void updateHeight(Node *aNode);
     Node *leftRotation(Node *aNode);
     Node *rightRotation(Node *aNode);
