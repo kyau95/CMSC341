@@ -5,8 +5,20 @@ WordTree::~WordTree() {
 }
 
 void WordTree::updateHeight(Node *aNode) {
-    // Formula: |Height of left subtree - Height of right subtree|
-    
+    if (aNode) {
+        if (aNode->_left && aNode->_right) {
+            aNode->_height = max(aNode->_left->_height, aNode->_right->_height) + 1;
+        }
+        else if (aNode->_left) {
+            aNode->_height = aNode->_left->_height + 1;
+        }   
+        else if (aNode->_right) {
+            aNode->_height = aNode->_right->_height + 1;
+        }
+        else {
+            aNode->_height = 0;
+        }
+    }
 }
 
 void WordTree::clearTree(Node *aNode) {
@@ -45,6 +57,17 @@ Node *WordTree::rightRotation(Node *aNode) {
 }
 
 int WordTree::checkBalance(Node *aNode) {
+    if (aNode) {
+        if (aNode->_left && aNode->_right) {
+            return aNode->_left->_height - aNode->_right->_height;
+        }
+        else if (aNode->_left && !aNode->_right) {
+            return aNode->_left->_height;
+        }
+        else if (aNode->_right && !aNode->_left) {
+            return aNode->_right->_height;
+        }
+    }
     return 0;
 }
 
@@ -79,7 +102,8 @@ int WordTree::getRootHeight() {
 }
 
 int WordTree::getNodeHeight(string word) {
-    return 0;
+    
+    return -1;
 }
 
 int WordTree::getNodeHeightHelp(Node *aNode, string word) {
