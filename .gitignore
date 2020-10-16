@@ -1,0 +1,3 @@
+# Ignore the cmake files 
+**/cmake-build-debug
+CMakeLists.txt
