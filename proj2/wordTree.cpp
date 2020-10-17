@@ -22,7 +22,19 @@ void WordTree::clearTree(Node *aNode) {
 }
 
 Node *WordTree::find(Node *aNode, const string &element) {
-
+    if (aNode->_value == element) {
+        return aNode;
+    }
+    else if (element < aNode->_value) {
+        if (aNode->_left) {
+            return find(aNode->_left, element);
+        }
+    }
+    else {
+        if (aNode->_right) {
+            return find(aNode->_right, element);
+        }
+    }
     return nullptr;
 }
 
@@ -63,14 +75,19 @@ Node *WordTree::rightRotation(Node *aNode) {
 }
 
 int WordTree::checkBalance(Node *aNode) {
+    // Formula: left subtree height - right subtree height
     int left_height = aNode && aNode->_left ?
                       aNode->_left->_height : 0;
     int right_height = aNode && aNode->_right ?
                        aNode->_right->_height : 0;
-    return abs(left_height - right_height);
+    return left_height - right_height;
 }
 
 Node *WordTree::reBalance(Node *aNode) {
+    // Four cases, single rotations (LL and RR) and double rotations (LR and RL);
+    // Balance factor(BF) is in range of {-1, 0, 1}
+    // BF < -1 = unbalanced on left side, BF in range = balanced, BF > 1 unbalanced on right side
+
 
     return nullptr;
 }
@@ -92,7 +109,7 @@ Node *WordTree::insert(const string &element, Node *&aNode) {
     }
     else if (element < aNode->_value) {
         if (aNode->_left) {
-            aNode->_left->_parent = insert(element, aNode->_left);
+            aNode->_left = insert(element, aNode->_left);
         }
         else {
             aNode->_left = new Node(element);
@@ -101,13 +118,14 @@ Node *WordTree::insert(const string &element, Node *&aNode) {
     }
     else {
         if (aNode->_right) {
-            aNode->_right->_parent = insert(element, aNode->_right);
+            aNode->_right = insert(element, aNode->_right);
         }
         else {
             aNode->_right = new Node(element);
             aNode->_right->_parent = aNode;
         }
     }
+    updateHeight(aNode);
 
     // Need to check for rebalancing for each potential cases, LL, RR, LR, RL
     int balance_factor = checkBalance(aNode);
@@ -142,9 +160,7 @@ int WordTree::searchCountHelp(Node *aNode, string word, int counter) {
     return 0;
 }
 
-int WordTree::getRootHeight() {
-    return _root->_height;
-}
+int WordTree::getRootHeight() { return _root->_height; }
 
 int WordTree::getNodeHeight(string word) {
     if (_root) {
@@ -196,15 +212,14 @@ void WordTree::dump(std::ostream &ostr) {
 }
 
 void WordTree::inorder() const {
-    if (_root) {
-        inorder_help(_root);
-    }
+    inorder_help(_root);
 }
 
 void WordTree::inorder_help(Node *node) const {
     if (node) {
         inorder_help(node->_left);
-        cout << node->_value << "\t\t" << node->_height << '\n';
+        cout << node->_value << "\t\t" << (node->_parent ? node->_parent->_value : "NULL") <<
+            "\t\t" << node->_height << '\n';
         inorder_help(node->_right);
     }
 }

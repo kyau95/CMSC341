@@ -31,9 +31,10 @@ int main() {
     w_tree.insert("apple");
     w_tree.insert("bananas");
     w_tree.insert("carrots");
+    cout << "current\t\tparent\t\theight\n";
     w_tree.inorder();
-    w_tree.leftRotation(w_tree._root);
-
+    w_tree.leftRotation(w_tree._root->getRight());
+    cout << "\nAfter rotation\n";
     w_tree.inorder();
     return 0;
 }
