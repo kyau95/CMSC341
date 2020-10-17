@@ -42,25 +42,26 @@ public:
     void insert(const string &element);  //insert, rebalance, update heights
     Node *find(const string &element);
     void dump(std::ostream &ostr = std::cout);
+    void inorder() const;
     int searchCount(string word);    //returns the number of operations for a search
     int getRootHeight();             //returns height of tree
     int getNodeHeight(string word);  //returns height of a node with key value word
     /****************************************************************
      * your public member functions start here
      * *************************************************************/
+    Node *leftRotation(Node *aNode);
+    Node *rightRotation(Node *aNode);
 
-    /****************************************************************
-     * your public member functions end here
-     * *************************************************************/
-private:
-    Node *_root;
+  /****************************************************************
+   * your public member functions end here
+   * *************************************************************/
+  Node *_root;
+ private:
     Node *insert(const string &element, Node *&aNode);  //insert helper function
     void inOrder(Node *aNode, std::ostream &ostr);      //inOrder helper
     Node *find(Node *aNode, const string &element);     //find helper
     void clearTree(Node *aNode);                        //helper called by destructor
     void updateHeight(Node *aNode);
-    Node *leftRotation(Node *aNode);
-    Node *rightRotation(Node *aNode);
     int checkBalance(Node *aNode);
     Node *reBalance(Node *aNode);
     int searchCountHelp(Node *aNode, string word, int counter);
@@ -68,7 +69,7 @@ private:
     /****************************************************************
      * your private member functions start here
      * *************************************************************/
-
+    void inorder_help(Node *node) const;
     /****************************************************************
      * your private member functions end here
      * *************************************************************/

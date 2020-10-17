@@ -5,20 +5,11 @@ WordTree::~WordTree() {
 }
 
 void WordTree::updateHeight(Node *aNode) {
-    if (aNode) {
-        if (aNode->_left && aNode->_right) {
-            aNode->_height = max(aNode->_left->_height, aNode->_right->_height) + 1;
-        }
-        else if (aNode->_left) {
-            aNode->_height = aNode->_left->_height + 1;
-        }   
-        else if (aNode->_right) {
-            aNode->_height = aNode->_right->_height + 1;
-        }
-        else {
-            aNode->_height = 0;
-        }
-    }
+    int left_height = aNode && aNode->_left ?
+                      aNode->_left->_height : 0;
+    int right_height = aNode && aNode->_right ?
+                       aNode->_right->_height : 0;
+    aNode->_height = max(left_height, right_height) + 1;
 }
 
 void WordTree::clearTree(Node *aNode) {
@@ -31,7 +22,7 @@ void WordTree::clearTree(Node *aNode) {
 }
 
 Node *WordTree::find(Node *aNode, const string &element) {
-    
+
     return nullptr;
 }
 
@@ -54,16 +45,17 @@ Node *WordTree::leftRotation(Node *aNode) {
     updateHeight(aNode);
     updateHeight(y);
 
+    if (_root == aNode) {
+        _root = aNode;
+    }
+
     return y;
 }
 
 Node *WordTree::rightRotation(Node *aNode) {
     Node *x = aNode->_left;
-    Node *temp = x->_right;
-
+    aNode->_left = x->_right;
     x->_right = aNode;
-    aNode->_left = temp;
-
     updateHeight(aNode);
     updateHeight(x);
 
@@ -71,22 +63,15 @@ Node *WordTree::rightRotation(Node *aNode) {
 }
 
 int WordTree::checkBalance(Node *aNode) {
-    if (aNode) {
-        if (aNode->_left && aNode->_right) {
-            return aNode->_left->_height - aNode->_right->_height;
-        }
-        else if (aNode->_left && !aNode->_right) {
-            return aNode->_left->_height;
-        }
-        else if (aNode->_right && !aNode->_left) {
-            return aNode->_right->_height;
-        }
-    }
-    return 0;
+    int left_height = aNode && aNode->_left ?
+                      aNode->_left->_height : 0;
+    int right_height = aNode && aNode->_right ?
+                       aNode->_right->_height : 0;
+    return abs(left_height - right_height);
 }
 
 Node *WordTree::reBalance(Node *aNode) {
-    
+
     return nullptr;
 }
 
@@ -101,6 +86,7 @@ void WordTree::insert(const string &element) {
 }
 
 Node *WordTree::insert(const string &element, Node *&aNode) {
+    // Perform normal insertion then check for rebalancing
     if (element == aNode->_value) {
         ++aNode->_count;
     }
@@ -130,15 +116,29 @@ Node *WordTree::insert(const string &element, Node *&aNode) {
 }
 
 int WordTree::searchCount(string word) {
+    int counter = 0;
     if (_root) {
-        return searchCountHelp(_root, word);
+        return searchCountHelp(_root, word, counter);
     }
     else {
-        return 0;
+        return counter;
     }
 }
 
 int WordTree::searchCountHelp(Node *aNode, string word, int counter) {
+    if (aNode->_value == word) {
+        return counter;
+    }
+    else if (word < aNode->_value) {
+        if (aNode->_left) {
+            searchCountHelp(aNode->_left, word, ++counter);
+        }
+    }
+    else {
+        if (aNode->_right) {
+            return searchCountHelp(aNode->_right, word, ++counter);
+        }
+    }
     return 0;
 }
 
@@ -193,4 +193,18 @@ void WordTree::dump(std::ostream &ostr) {
      *      Do not modify
      * ********************************/
     inOrder(_root, ostr);
+}
+
+void WordTree::inorder() const {
+    if (_root) {
+        inorder_help(_root);
+    }
+}
+
+void WordTree::inorder_help(Node *node) const {
+    if (node) {
+        inorder_help(node->_left);
+        cout << node->_value << "\t\t" << node->_height << '\n';
+        inorder_help(node->_right);
+    }
 }
