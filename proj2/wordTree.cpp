@@ -5,6 +5,12 @@ WordTree::~WordTree() {
 }
 
 void WordTree::updateHeight(Node *aNode) {
+    // Height is the height of the deepest subtree + 1
+    //              2 o
+    //               / \
+    //            1 o   o
+    //               \
+    //              0 o
     int left_height = aNode && aNode->_left ?
                       aNode->_left->_height : 0;
     int right_height = aNode && aNode->_right ?
@@ -48,30 +54,55 @@ Node *WordTree::find(const string &element) {
 }
 
 Node *WordTree::leftRotation(Node *aNode) {
-    Node *y = aNode->_right;
-    Node *temp = y->_left;
-
-    y->_left = aNode;
-    aNode->_right = temp;
-
-    updateHeight(aNode);
-    updateHeight(y);
-
-    if (_root == aNode) {
-        _root = aNode;
+    Node *right_child = aNode->_right;
+    aNode->_right = right_child->_left;
+    if (right_child->_left) {
+        right_child->_left->_parent = aNode;
     }
+    right_child->_parent = aNode->_parent;
+    if (aNode->_parent == nullptr) {
+        _root = right_child;
+    }
+    else if (aNode == aNode->_parent->_left) {
+        aNode->_parent->_left = right_child;
+    }
+    else {
+        aNode->_parent->_right = right_child;
+    }
+    right_child->_left = aNode;
+    aNode->_parent = right_child;
 
-    return y;
+    // Update the height of the rotated nodes
+    updateHeight(aNode);
+    updateHeight(right_child);
+
+    return right_child;
 }
 
 Node *WordTree::rightRotation(Node *aNode) {
-    Node *x = aNode->_left;
-    aNode->_left = x->_right;
-    x->_right = aNode;
-    updateHeight(aNode);
-    updateHeight(x);
+    Node *left_child = aNode->_left;
+    aNode->_left = left_child->_right;
+    if (left_child->_right) {
+        left_child->_right->_parent = aNode;
+    }
+    aNode->_parent = left_child->_parent;
+    if (aNode->_parent == nullptr) {
+        _root = left_child;
+    }
+    else if (aNode == aNode->_parent->_right) {
+        aNode->_parent->_right = left_child;
+    }
+    else {
+        aNode->_parent->_left = left_child;
+    }
 
-    return x;
+    left_child->_right = aNode;
+    aNode->_parent = left_child;
+
+    updateHeight(aNode);
+    updateHeight(left_child);
+
+    return left_child;
 }
 
 int WordTree::checkBalance(Node *aNode) {

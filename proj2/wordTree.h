@@ -24,7 +24,9 @@ public:
     int getFrequency() { return _count; }  //returns number of occurrences of the word
     int getHeight() { return _height; }
     string getValue() { return _value; }
+    // Test purposes only
     Node *getRight() { return _right; }
+    Node *getLeft() { return _left; }
 
 private:
     string _value;  //the word in this node
