@@ -72,7 +72,7 @@ Node *WordTree::leftRotation(Node *aNode) {
     right_child->_left = aNode;
     aNode->_parent = right_child;
 
-    // Update the height of the rotated nodes
+    // Update the height after rotation
     updateHeight(aNode);
     updateHeight(right_child);
 
@@ -85,7 +85,7 @@ Node *WordTree::rightRotation(Node *aNode) {
     if (left_child->_right) {
         left_child->_right->_parent = aNode;
     }
-    aNode->_parent = left_child->_parent;
+    left_child->_parent = aNode->_parent;
     if (aNode->_parent == nullptr) {
         _root = left_child;
     }
@@ -95,10 +95,10 @@ Node *WordTree::rightRotation(Node *aNode) {
     else {
         aNode->_parent->_left = left_child;
     }
-
     left_child->_right = aNode;
     aNode->_parent = left_child;
 
+    // Update the height after rotation
     updateHeight(aNode);
     updateHeight(left_child);
 
@@ -250,7 +250,7 @@ void WordTree::inorder_help(Node *node) const {
     if (node) {
         inorder_help(node->_left);
         cout << node->_value << "\t\t" << (node->_parent ? node->_parent->_value : "NULL") <<
-            "\t\t" << node->_height << '\n';
+             "\t\t" << node->_height << '\n';
         inorder_help(node->_right);
     }
 }
