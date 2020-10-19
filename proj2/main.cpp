@@ -22,15 +22,17 @@ int main() {
     //     aTree.dumpTitle("the wonderful wizard of oz");
     //     cout << endl;
     WordTree w_tree;
-    string test_arr[]{"mango", "carrot", "bird", "tree", "fire", "bird", "orange", "banana", "pear", "apple", "tire"};
-    for (int i = 0; i < 11; ++i) {
-        w_tree.insert(test_arr[i]);
+    string arr[]{"m", "w", "j", "c", "d", "s", "n", "i", "t", "h", "v", "g", "k", "u", "r"};
+    for (int i = 0; i < 15; ++i) {
+        w_tree.insert(arr[i]);
+//        w_tree.inorder();
+//        cout << endl;
     }
-    cout << "current\t\tparent\t\theight\n";
-    w_tree.dump();
-    cout << endl;
+    cout << w_tree.searchCount("v");
+//    cout << w_tree.searchCount("r");
+//    cout << "current\t\tparent\t\theight\n";
+//    cout << endl;
     w_tree.inorder();
-    cout << "\nAfter rotation\n";
-    w_tree.inorder();
+//    cout << (w_tree.find("r") ? w_tree.find("r")->getValue() : "NULL") << endl;
     return 0;
 }

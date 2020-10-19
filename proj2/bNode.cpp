@@ -1,5 +1,10 @@
+#ifndef _BNODE_H_
+#define _BNODE_H_
+
 #include "bNode.h"
+
 BNode::BNode() {}
+
 BNode::BNode(string key, string author, string text) {
     _key = key;
     _author = author;
@@ -35,3 +40,5 @@ int BNode::getTextTreeHeight() {
 int BNode::getNodeHeight(string word) {
     return 0;
 }
+
+#endif // _BNODE_H_

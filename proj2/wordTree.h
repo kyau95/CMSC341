@@ -52,8 +52,6 @@ public:
     /****************************************************************
      * your public member functions start here
      * *************************************************************/
-    Node *leftRotation(Node *aNode);
-    Node *rightRotation(Node *aNode);
 
   /****************************************************************
    * your public member functions end here
@@ -69,6 +67,8 @@ public:
     Node *reBalance(Node *aNode);
     int searchCountHelp(Node *aNode, string word, int counter);
     int getNodeHeightHelp(Node *aNode, string word);
+    Node *leftRotation(Node *aNode);
+    Node *rightRotation(Node *aNode);
     /****************************************************************
      * your private member functions start here
      * *************************************************************/

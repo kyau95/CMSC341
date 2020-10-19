@@ -1,3 +1,6 @@
+#ifndef _BOOK_TREE_H_
+#define _BOOK_TREE_H_
+
 #include "bookTree.h"
 BookTree::BookTree() { _root = nullptr; }
 
@@ -124,3 +127,5 @@ void BookTree::dump(bool verbose) const {
      * ********************************/
     inorderHelp(_root, verbose);
 }
+
+#endif // _BOOK_TREE_H_
