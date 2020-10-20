@@ -40,7 +40,7 @@ private:
 class WordTree {
 public:
     friend class Grader;  //for grading purposes
-    WordTree() : _root(nullptr){};
+    WordTree() : _root(nullptr) {};
     ~WordTree();
     void insert(const string &element);  //insert, rebalance, update heights
     Node *find(const string &element);
@@ -53,11 +53,11 @@ public:
      * your public member functions start here
      * *************************************************************/
 
-  /****************************************************************
-   * your public member functions end here
-   * *************************************************************/
-  Node *_root;
- private:
+    /****************************************************************
+     * your public member functions end here
+     * *************************************************************/
+    Node *_root;
+private:
     Node *insert(const string &element, Node *&aNode);  //insert helper function
     void inOrder(Node *aNode, std::ostream &ostr);      //inOrder helper
     Node *find(Node *aNode, const string &element);     //find helper

@@ -12,7 +12,7 @@ BNode::BNode(string key, string author, string text) {
     _right = nullptr;
     _flag = false;
     _parent = nullptr;
-    createTextTree(text);
+    createTextTree(text); // creates WordTree object
 }
 BNode::~BNode() {}
 
@@ -26,19 +26,15 @@ void BNode::createTextTree(string text) {
 }
 
 int BNode::findFrequency(string word) {
-    return 0;
+    // If node pointer is not a nullptr, can return the frequency, else 0
+    Node *node = _tree.find(word);
+    return (node) ? node->getFrequency() : 0;
 }
 
-int BNode::searchCount(string word) {
-    return 0;
-}
+int BNode::searchCount(string word) { return _tree.searchCount(word); }
 
-int BNode::getTextTreeHeight() {
-    return 0;
-}
+int BNode::getTextTreeHeight() { return _tree.getRootHeight(); }
 
-int BNode::getNodeHeight(string word) {
-    return 0;
-}
+int BNode::getNodeHeight(string word) { return _tree.getNodeHeight(word); }
 
 #endif // _BNODE_H_

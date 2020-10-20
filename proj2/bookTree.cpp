@@ -4,15 +4,16 @@
 #include "bookTree.h"
 BookTree::BookTree() { _root = nullptr; }
 
-BookTree::~BookTree() {
-}
+BookTree::~BookTree() { clear(_root); }
 
 BNode *BookTree::makeSplay(BNode *root, string key) {
     return nullptr;
 }
+
 BNode *BookTree::rightRotate(BNode *x) {
     return nullptr;
 }
+
 BNode *BookTree::leftRotate(BNode *x) {
     return nullptr;
 }
@@ -20,7 +21,13 @@ BNode *BookTree::leftRotate(BNode *x) {
 bool BookTree::insert(string key, string author, string text) {
     return true;
 }
+
 void BookTree::clear(BNode *root) {
+    if (root) {
+        clear(root->_left);
+        clear(root->_right);
+        delete root;
+    }
 }
 
 int BookTree::findFrequency(string title, string word) {
@@ -43,6 +50,7 @@ int BookTree::getWordHeight(string title, string word) {
     return -1;
 }
 
+// ========================= NO TOUCHY =========================
 string BookTree::getRootKey() {
     /***********************************
      *      Do not modify
@@ -50,7 +58,6 @@ string BookTree::getRootKey() {
     return _root->_key;
 }
 
-// ========================= NO TOUCHY =========================
 void BookTree::loadData(string dataFile) {
     /***********************************
      *      This function is implemented
@@ -84,7 +91,7 @@ void BookTree::loadData(string dataFile) {
         token.erase(0, tempPos + itemsDeleimiter.length() + 1);
         //get the text
         string text = token.substr(0, token.length() - 1);  //remove last newline
-                                                            //clean up the text, remove all non-alphanumeric characters
+        //clean up the text, remove all non-alphanumeric characters
         for (std::string::iterator iter = text.begin(); iter != text.end();) {
             if (!std::isalnum(*iter) && *iter != ' ')
                 iter = text.erase(iter);
@@ -113,7 +120,8 @@ void BookTree::inorderHelp(BNode *root, bool verbose) const {
             root->_tree.dump();
             inorderHelp(root->_right, verbose);
             cout << ")";
-        } else {
+        }
+        else {
             inorderHelp(root->_left, verbose);
             cout << root->_key;
             inorderHelp(root->_right, verbose);
