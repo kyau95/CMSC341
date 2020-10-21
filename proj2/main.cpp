@@ -22,17 +22,17 @@ int main() {
 //     aTree.dumpTitle("the wonderful wizard of oz");
 //     cout << endl;
     WordTree t;
-//    t.insert("durian");
+    t.insert("durian");
     t.insert("cherry");
     t.insert("apple");
     t.insert("banana");
-//    t.insert("apple");
-//    t.insert("grape");
-//    t.insert("mango");
+    t.insert("apple");
+    t.insert("grape");
+    t.insert("amazon");
+    t.insert("mango");
 //    t.insert("strawberry");
 //    t.insert("orange");
 //    t.insert("tomato");
-    t.showValueAndParentValue();
-//    t.dump();
+    t.dump();
     return 0;
 }

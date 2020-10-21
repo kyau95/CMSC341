@@ -12,48 +12,45 @@ BNode *BookTree::makeSplay(BNode *root, string key) {
 }
 
 BNode *BookTree::rightRotate(BNode *x) {
-    BNode *temp = x->_left;
-    x->_left = temp->_right;
-    if (temp->_right) {
-        temp->_right->_parent = x;
+    BNode *parent_temp = x->_parent;
+    BNode *pivot = x->_left;
+    x->_left = pivot->_right;
+    if (pivot->_right) {
+        pivot->_right->_parent = x;
     }
-    temp->_parent = x->_parent;
-    if (x->_parent == nullptr) {
-        _root = temp;
+    pivot->_right = x;
+    x->_parent = pivot;
+    pivot->_parent = parent_temp;
+    if (parent_temp) {
+        if (parent_temp->_left == x) {
+            parent_temp->_left = pivot;
+        }
+        else {
+            parent_temp->_right = pivot;
+        }
     }
-    else if (x == x->_parent->_right) {
-        x->_parent->_right = temp;
-    }
-    else {
-        x->_parent->_left = temp;
-    }
-    temp->_right = x;
-    x->_parent = temp;
-    return temp;
+    return pivot;
 }
 
 BNode *BookTree::leftRotate(BNode *x) {
-    BNode *temp = x->_right;
-    x->_right = temp->_left;
-    if (temp->_left) {
-        temp->_left->_parent = x;
+    BNode *parent_temp = x->_parent;
+    BNode *pivot = x->_right;
+    x->_right = pivot->_left;
+    if (pivot->_left) {
+        pivot->_left->_parent = x;
     }
-    temp->_parent = x->_parent;
-    if (x->_parent == nullptr) {
-        _root = temp;
-    }
-    else {
-        if (x == x->_parent->_left) {
-            x->_parent->_left = temp;
+    pivot->_left = x;
+    x->_parent = pivot;
+    pivot->_parent = parent_temp;
+    if (parent_temp) {
+        if (parent_temp->_right == x) {
+            parent_temp->_right = pivot;
         }
         else {
-            x->_parent->_right = temp;
+            parent_temp->_left = pivot;
         }
     }
-    temp->_left = x;
-    x->_parent = temp;
-
-    return temp;
+    return pivot;
 }
 
 bool BookTree::insert(string key, string author, string text) {
@@ -142,17 +139,60 @@ void BookTree::dumpTitle(string title) {
 }
 
 int BookTree::searchCount(string title, string word) {
-
+    if (_root) {
+        return searchCountHelper(_root, title, word);
+    }
     return 0;
 }
 
-int BookTree::getTextTreeHeight(string title) {
+int BookTree::searchCountHelper(BNode *node, string title, string word) {
+    if (title == node->_key) {
+        return node->_tree.searchCount(word);
+    }
+    else if (title < node->_key) {
+        return searchCountHelper(node->_left, title, word);
+    }
+    else {
+        return searchCountHelper(node->_right, title, word);
+    }
+}
 
+int BookTree::getTextTreeHeight(string title) {
+    if (_root) {
+        return getTextTreeHeightHelper(_root, title);
+    }
     return -1;
 }
 
+int BookTree::getTextTreeHeightHelper(BNode *node, string title) {
+    if (title == node->_key) {
+        return node->_tree.getRootHeight();
+    }
+    else if (title < node->_key) {
+        return getTextTreeHeightHelper(node->_left, title);
+    }
+    else {
+        return getTextTreeHeightHelper(node->_right, title);
+    }
+}
+
 int BookTree::getWordHeight(string title, string word) {
+    if (_root) {
+        return getWordHeightHelper(_root, title, word);
+    }
     return -1;
+}
+
+int BookTree::getWordHeightHelper(BNode *node, string title, string word) {
+    if (title == node->_key) {
+        return node->_tree.getNodeHeight(word);
+    }
+    else if (title < node->_key) {
+        return getWordHeightHelper(node->_left, title, word);
+    }
+    else {
+        return getWordHeightHelper(node->_right, title, word);
+    }
 }
 
 // ========================= NO TOUCHY =========================

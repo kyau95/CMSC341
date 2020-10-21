@@ -51,7 +51,7 @@ public:
     /****************************************************************
      * your public member functions start here
      * *************************************************************/
-    void showValueAndParentValue() const;
+
     /****************************************************************
      * your public member functions end here
      * *************************************************************/
@@ -71,7 +71,8 @@ private:
     /****************************************************************
      * your private member functions start here
      * *************************************************************/
-    void showValueAndParentValueHelper(Node *node) const;
+    Node *leftRightRotation(Node *aNode);
+    Node *rightLeftRotation(Node *aNode);
     /****************************************************************
      * your private member functions end here
      * *************************************************************/

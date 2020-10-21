@@ -39,8 +39,11 @@ private:
     BNode *findHelper(BNode *node, string title, string word);
     bool insertHelper(BNode *node, string key, string author, string text);
     int findFrequencyHelper(BNode *node, string title, string word);
+    int searchCountHelper(BNode *node, string title, string word);
+    int getTextTreeHeightHelper(BNode *node, string title);
+    int getWordHeightHelper(BNode *node, string title, string word);
     /****************************************************************
-        * your private member functions end here
-        * *************************************************************/
+    * your private member functions end here
+    * *************************************************************/
 };
 #endif
