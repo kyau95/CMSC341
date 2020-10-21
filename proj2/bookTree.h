@@ -21,7 +21,7 @@ public:
     /****************************************************************
         * your public member functions start here
         * *************************************************************/
-
+    BNode *find(string title, string word);
     /****************************************************************
         * your public member functions end here
         * *************************************************************/
@@ -36,7 +36,9 @@ private:
     /****************************************************************
         * your private member functions start here
         * *************************************************************/
-
+    BNode *findHelper(BNode *node, string title, string word);
+    bool insertHelper(BNode *node, string key, string author, string text);
+    int findFrequencyHelper(BNode *node, string title, string word);
     /****************************************************************
         * your private member functions end here
         * *************************************************************/

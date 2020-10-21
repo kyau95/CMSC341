@@ -13,7 +13,7 @@ public:
                             _left(nullptr),
                             _right(nullptr),
                             _height(0),
-                            _count(0),
+                            _count(1),
                             _parent(nullptr) {}
     void printValue() {
         if (this != nullptr)
@@ -45,14 +45,13 @@ public:
     void insert(const string &element);  //insert, rebalance, update heights
     Node *find(const string &element);
     void dump(std::ostream &ostr = std::cout);
-    void inorder() const;
     int searchCount(string word);    //returns the number of operations for a search
     int getRootHeight();             //returns height of tree
     int getNodeHeight(string word);  //returns height of a node with key value word
     /****************************************************************
      * your public member functions start here
      * *************************************************************/
-
+    void showValueAndParentValue() const;
     /****************************************************************
      * your public member functions end here
      * *************************************************************/
@@ -72,7 +71,7 @@ private:
     /****************************************************************
      * your private member functions start here
      * *************************************************************/
-    void inorder_help(Node *node) const;
+    void showValueAndParentValueHelper(Node *node) const;
     /****************************************************************
      * your private member functions end here
      * *************************************************************/
