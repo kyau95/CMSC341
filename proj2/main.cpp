@@ -1,10 +1,11 @@
 #include "bookTree.h"
 #include <random>
+#include <vector>
 using namespace std;
 
 int main() {
 //     BookTree aTree;
-//     aTree.loadData("data.txt");
+//     aTree.loadData("/home/mky/Desktop/341/proj2/data.txt");
 //     cout << "Frequency of tinsmith in The Wonderful Wizard of Oz: " << endl;
 //     cout << "\t" << aTree.findFrequency("the wonderful wizard of oz", "tinsmith") << endl
 //          << endl;
@@ -21,18 +22,15 @@ int main() {
 //          << endl;
 //     aTree.dumpTitle("the wonderful wizard of oz");
 //     cout << endl;
-    WordTree t;
-    t.insert("durian");
-    t.insert("cherry");
-    t.insert("apple");
-    t.insert("banana");
-    t.insert("apple");
-    t.insert("grape");
-    t.insert("amazon");
-    t.insert("mango");
-//    t.insert("strawberry");
-//    t.insert("orange");
-//    t.insert("tomato");
-    t.dump();
+//    WordTree tree;
+//    vector<string> values{"may", "i", "have", "your", "attention", "please", "will",
+//                          "the", "real", "slim", "shady", "please", "stand", "up"};
+//    for (const auto& s : values) {
+//        tree.insert(s);
+//    }
+    BNode node("never gonna give you up", "rick astley",
+                "never gonna give you up never gonna let you down never gonna run around and desert you");
+    cout << node.findFrequency("never");
+    node._tree.dump();
     return 0;
 }

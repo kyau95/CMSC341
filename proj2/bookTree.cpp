@@ -7,8 +7,42 @@ BookTree::BookTree() { _root = nullptr; }
 BookTree::~BookTree() { clear(_root); }
 
 BNode *BookTree::makeSplay(BNode *root, string key) {
-
-    return nullptr;
+    if (!root->_parent) {
+        return root;
+    }
+    else {
+        if (!root->_parent->_parent) {
+            if (root == root->_parent->_left) {
+                // zig rotation
+                root = rightRotate(root->_parent);
+            }
+            else {
+                // zag rotation
+                root = leftRotate(root->_parent);
+            }
+        }
+        else if (root == root->_parent->_left && root->_parent == root->_parent->_parent->_left) {
+             // zig-zag
+             root->_parent->_parent = rightRotate(root->_parent->_parent);
+             root->_parent = rightRotate(root->_parent);
+        }
+        else if (root == root->_parent->_left && root->_parent == root->_parent->_parent->_right) {
+            // zag-zag
+            root->_parent->_parent = leftRotate(root->_parent->_parent);
+            root->_parent = leftRotate(root->_parent);
+        }
+        else if (root == root->_parent->_right && root->_parent == root->_parent->_parent->_left) {
+            // zig-zag
+            root->_parent = leftRotate(root->_parent);
+            root->_parent = rightRotate(root->_parent);
+        }
+        else {
+            // zag-zig
+            root->_parent = rightRotate(root->_parent);
+            root->_parent = leftRotate(root->_parent);
+        }
+    }
+    return makeSplay(root->_parent, key);
 }
 
 BNode *BookTree::rightRotate(BNode *x) {
@@ -57,9 +91,7 @@ bool BookTree::insert(string key, string author, string text) {
     if (_root) {
         return insertHelper(_root, key, author, text);
     }
-    else {
-        _root = new BNode(key, author, text);
-    }
+    _root = new BNode(key, author, text);
     return true;
 }
 
@@ -118,6 +150,7 @@ int BookTree::findFrequency(string title, string word) {
 }
 
 int BookTree::findFrequencyHelper(BNode *node, string title, string word) {
+    // if the title matches the key, search for the word, if found returns the node's count member
     if (node->_key == title) {
         return node->findFrequency(word);
     }
@@ -134,7 +167,20 @@ int BookTree::findFrequencyHelper(BNode *node, string title, string word) {
 
 void BookTree::dumpTitle(string title) {
     if (_root) {
+        dumpTitleHelper(_root, title);
+    }
+}
 
+void BookTree::dumpTitleHelper(BNode *node, string title) {
+    // if the title matches the key, dump that tree
+    if (node->_key == title) {
+        node->_tree.dump();
+    }
+    else if (title < node->_key) {
+        dumpTitleHelper(node->_left, title);
+    }
+    else {
+        dumpTitleHelper(node->_right, title);
     }
 }
 
@@ -146,6 +192,7 @@ int BookTree::searchCount(string title, string word) {
 }
 
 int BookTree::searchCountHelper(BNode *node, string title, string word) {
+    // if the title matches the key, search the word and then return the value from that word, if found
     if (title == node->_key) {
         return node->_tree.searchCount(word);
     }
@@ -165,6 +212,7 @@ int BookTree::getTextTreeHeight(string title) {
 }
 
 int BookTree::getTextTreeHeightHelper(BNode *node, string title) {
+    // if the title matches the key, search for the word and return the roots height
     if (title == node->_key) {
         return node->_tree.getRootHeight();
     }

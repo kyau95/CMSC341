@@ -13,7 +13,7 @@ public:
                             _left(nullptr),
                             _right(nullptr),
                             _height(0),
-                            _count(1),
+                            _count(0),
                             _parent(nullptr) {}
     void printValue() {
         if (this != nullptr)
@@ -51,7 +51,7 @@ public:
     /****************************************************************
      * your public member functions start here
      * *************************************************************/
-
+    Node *getRoot() const { return _root; };
     /****************************************************************
      * your public member functions end here
      * *************************************************************/

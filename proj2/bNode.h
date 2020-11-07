@@ -26,11 +26,12 @@ public:
     int searchCount(string word);    //returns the number of operations for a search in AVL tree
     int getTextTreeHeight();         //returns the height of _tree
     int getNodeHeight(string word);  //returns height of a node in _tree
+    WordTree _tree;  //the AVL tree that stores the words from text
+
 private:
     void createTextTree(string text);
     string _key;     //stores the title of the book
     string _author;  //stores the author's name
-    WordTree _tree;  //the AVL tree that stores the words from text
     BNode *_left;
     BNode *_right;
     BNode *_parent;

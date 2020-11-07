@@ -39,6 +39,7 @@ private:
     BNode *findHelper(BNode *node, string title, string word);
     bool insertHelper(BNode *node, string key, string author, string text);
     int findFrequencyHelper(BNode *node, string title, string word);
+    void dumpTitleHelper(BNode *node, string title);
     int searchCountHelper(BNode *node, string title, string word);
     int getTextTreeHeightHelper(BNode *node, string title);
     int getWordHeightHelper(BNode *node, string title, string word);
