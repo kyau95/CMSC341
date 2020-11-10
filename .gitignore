@@ -6,3 +6,8 @@
 
 # Ignore CMake file
 CMakeLists.txt
+
+# Ignore .vscode directory
+**/.vscode
+
+

@@ -51,31 +51,31 @@ int main() {
     queue1.dump();
 
     // Testing copy constructor
-    cout << endl;
-    PQueue queue3(queue1);
+    cout << "\nCopying queue1 into queue3:\n";
+    PQueue queue3 = queue1;
     queue3.dump();
     cout << endl;
 
-    // queue1.setPriorityFn(priorityFn2);
+    queue1.setPriorityFn(priorityFn2);
 
-    // std::cout << std::endl << "Contents of queue1 after changing the priority function to priorityFn2:\n";
-    // queue1.printPatientQueue();
-    // std::cout << "\nDump queue1 after changing the priority function to priorityFn2:\n";
-    // queue1.dump();
+    std::cout << std::endl << "Contents of queue1 after changing the priority function to priorityFn2:\n";
+    queue1.printPatientQueue();
+    std::cout << "\nDump queue1 after changing the priority function to priorityFn2:\n";
+    queue1.dump();
 
-    // queue1.setPriorityFn(priorityFn1);
+    queue1.setPriorityFn(priorityFn1);
 
-    // std::cout << std::endl << "Contents of queue1 after changing the priority function back to priorityFn1:\n";
-    // queue1.printPatientQueue();
-    // std::cout << "\nDump queue1 after changing the priority function back to priorityFn1:\n";
-    // queue1.dump();
+    std::cout << std::endl << "Contents of queue1 after changing the priority function back to priorityFn1:\n";
+    queue1.printPatientQueue();
+    std::cout << "\nDump queue1 after changing the priority function back to priorityFn1:\n";
+    queue1.dump();
 
     // Remove and print jobs in priority order
-    // std::cout << "\nFinal queue1 in priority order:\n";
-    // while (queue1.numPatients() > 0) {
-    //     Patient patient = queue1.getNextPatient();
-    //     std::cout << "[" << priorityFn1(patient) << "] " << patient << std::endl;
-    // }
+    std::cout << "\nFinal queue1 in priority order:\n";
+    while (queue1.numPatients() > 0) {
+        Patient patient = queue1.getNextPatient();
+        std::cout << "[" << priorityFn1(patient) << "] " << patient << std::endl;
+    }
     return 0;
 }
 

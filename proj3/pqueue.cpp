@@ -17,9 +17,10 @@ PQueue::PQueue(const PQueue& rhs) {
     if (&rhs == nullptr) {
         throw domain_error("Nullptr passed into copy constructor");
     }
+    // Initialize all member fields with rhs values
     priority = rhs.priority; 
     _size = rhs._size;
-    _heap = copyHeap(_heap);
+    _heap = copyHeap(rhs._heap); // Use rhs _heap to deep copy to object heap
 }
 
 Node* PQueue::copyHeap(Node* node) {
@@ -39,12 +40,17 @@ PQueue& PQueue::operator=(const PQueue& rhs) {
     if (this == &rhs) {
         return *this;
     }
-    // TODO deep copy the tree
-    
+    priority = rhs.priority;
+    _size = rhs._size;
+
+    // Clear current heap then deep copy other heap
+    clear();
+    _heap = copyHeap(rhs._heap);
     return *this;
 }
 
 void PQueue::insertPatient(const Patient& input) {
+    // Insert via merges
     if (_heap) {
         Node* newNode = new Node(input);
         _heap = mergeAux(_heap, newNode);
@@ -62,10 +68,10 @@ Node* PQueue::mergeAux(Node* heap1, Node* heap2) {
     if (!heap2) {
         return heap1;
     }
-    // Calculate the key values
+    // Calculate the priority values, they will be the keys to the nodes
     int priority1 = priority(heap1->_patient);
     int priority2 = priority(heap2->_patient);
-    if (priority1 > priority2) {  // Make sure heap1 has the smallest priority
+    if (priority1 > priority2) {     // Make sure heap1 has the smallest priority
         temp = heap1;
         heap1 = heap2;
         heap2 = temp;
@@ -88,13 +94,10 @@ Patient PQueue::getNextPatient() {
     }
     // Set a temporary pointer to the current root
     // Merge the left and right subtrees of the heap
-    Patient p = _heap->_patient;
     Node* oldRoot = _heap;
-    Node *mergeLeft = _heap->_left, *mergeRight = _heap->_right;
-    _heap = mergeAux(mergeLeft, mergeRight);
-    delete oldRoot;
+    _heap = mergeAux(_heap->_left, _heap->_right);
     --_size;
-    return p;
+    return oldRoot->_patient;
 }
 
 void PQueue::mergeWithQueue(PQueue& rhs) {
@@ -104,9 +107,9 @@ void PQueue::mergeWithQueue(PQueue& rhs) {
     if (priority != rhs.priority) {
         throw domain_error("Error: Priority functions do not match");
     }
-    // TODO fix memory leak, double freeing since rhs nodes are still being
-    // pointed to in the other pqueue
     _heap = mergeAux(_heap, rhs._heap);
+    // MUST set rhs._heap to nullptr to delete linkage between
+    // merged nodes and rhs._heap
     rhs._heap = nullptr;
     _size += rhs._size;
 }
@@ -149,9 +152,18 @@ prifn_t PQueue::getPriorityFn() const {
 }
 
 void PQueue::setPriorityFn(prifn_t priFn) {
-    PQueue tempQueue = *this;
-    priority = priFn;
-    // TODO rebuild the heap afterwards
+    // In case assigning the same priority function, just leave
+    if (priFn == priority) {
+        return;
+    }
+    // Create empty PQueue for insertion
+    PQueue newPQueue(priFn);
+
+    // Rebuild heap
+    newPQueue._heap = mergeAux(newPQueue._heap, _heap);
+    _heap = nullptr;
+    // Assign current PQueue = newPQueue after insertions
+    *this = newPQueue;
 }
 
 void PQueue::dump() const {
