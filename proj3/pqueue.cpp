@@ -152,6 +152,7 @@ prifn_t PQueue::getPriorityFn() const {
 }
 
 void PQueue::setPriorityFn(prifn_t priFn) {
+    // FIXME not rebuilding heap properly
     // In case assigning the same priority function, just leave
     if (priFn == priority) {
         return;
