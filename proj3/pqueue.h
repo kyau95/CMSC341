@@ -144,10 +144,20 @@ private:
     /******************************************
     * Private function declarations go here! *
     ******************************************/
-    void clear(Node* node); // private helper for clear()
 
-    Node* mergeAux(Node* heap1, Node* heap2); // Merge helper function
+   // Auxillary function for public clean()
+    void clearAux(Node* node); 
 
-    void inorder(Node* node) const; // print the tree inorder traversal
+    // Auxillary merge function to combine two heaps
+    Node* mergeAux(Node* heap1, Node* heap2);
+
+    // Helper function for public dump()
+    void inorder(Node* node) const;
+
+    // Helper for public printPatientQueue()
+    void printPatientAux(Node* node) const; 
+
+    // Helper function for copying heap 
+    Node* copyHeap(Node* node);
 };
-#endif
+#endif // _PQUEUE_H
