@@ -31,7 +31,8 @@ This project was much nicer compared to the previous two. The project was to mak
 
 This project introduced to me the concept of function pointers. Though the concept is not difficult, it is strange to those that have not witnessed it before. I think though, I will stick to more lambdas over function pointers unless necessary. 
 
-The skew heap itself was not too challenging. The merges took some time to get right and make sure they end up in the correct order so that each insertion would result in O(logn) time. The most challenging part to me was when rebuilding the entire heap after changing the function pointer that determined the priority of each node. Overall the result was O(nlogn) restructures and O(logn) merges. 
+The skew heap itself was not too challenging. The merges took some time to get right and make sure they end up in the correct order so that each insertion would result in O(logn) time. The most challenging part to me was when rebuilding the entire heap after changing the function pointer that determined the priority of each node. Overall the result was O(nlogn) restructures and O(logn) merges.
+
 <br>
 
 ## **Project 4: Hash Table of Heaps**
