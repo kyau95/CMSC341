@@ -11,7 +11,7 @@ int priorityFn2(const Patient &patient);
 int main() {
     // Create a patient queue with capacity five and priority function
     // priorityFn1()
-
+    
     PQueue queue1(priorityFn1);
     PQueue queue2(priorityFn1);
 
@@ -21,12 +21,12 @@ int main() {
     Patient patient2("Liz", 5, 37, 98, 26, 70, 100);
     Patient patient3("Nick", 2, 37, 85, 34, 125, 85);
     Patient patient4("Eva", 4, 37, 95, 22, 115, 95);
-
+    
     queue1.insertPatient(patient3);
     queue1.insertPatient(patient1);
     queue1.insertPatient(patient2);
     queue1.insertPatient(patient4);
-
+    
     std::cout << "\nqueue1 dump after inserting 4 patients (Nick, Sam, Liz, Eva):" << std::endl;
     queue1.dump();
 
@@ -35,7 +35,7 @@ int main() {
 
     queue2.insertPatient(patient5);
     queue2.insertPatient(patient6);
-
+    
     std::cout << "\nqueue2 dump after inserting 2 patients (John, Mia):" << std::endl;
     queue2.dump();
     cout << endl;
@@ -98,5 +98,5 @@ int priorityFn1(const Patient &patient) {
 int priorityFn2(const Patient &patient) {
     // Priority only based on triage
     // Triage is set by a health care professional
-    return patient.getTriage();
+    return patient.getTriage(); 
 }

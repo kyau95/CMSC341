@@ -1,0 +1,99 @@
+Dump of ht:
+[0]:
+[1]:
+x101 (priority 12, mega car)
+x101 (priority 5, super car)
+x101 (priority 4, shack of cars)
+[2]:
+gt500 (priority 11, super car)
+gt500 (priority 3, shack of cars)
+[3]:
+stratos (priority 15, super car)
+stratos (priority 7, car world)
+stratos (priority 8, shack of cars)
+[4]:
+[5]:
+challenger (priority 10, mega car)
+challenger (priority 5, car world)
+challenger (priority 3, car joint)
+[6]:
+[7]:
+miura (priority 28, mega car)
+[8]:
+[9]:
+
+Get next 'challenger' order...
+  challenger (priority 10, mega car)
+
+Get next 'miura' order...
+  miura (priority 28, mega car)
+
+Get next 'gt500' order...
+  gt500 (priority 11, super car)
+
+Get next 'gt500' order...
+  gt500 (priority 3, shack of cars)
+
+Get next 'gt500' order...
+  No gt500 orders!
+
+
+Dump of ht:
+[0]:
+[1]:
+x101 (priority 12, mega car)
+x101 (priority 5, super car)
+x101 (priority 4, shack of cars)
+[2]:
+[3]:
+stratos (priority 15, super car)
+stratos (priority 7, car world)
+stratos (priority 8, shack of cars)
+[4]:
+[5]:
+challenger (priority 5, car world)
+challenger (priority 3, car joint)
+[6]:
+[7]:
+[8]:
+[9]:
+
+Create copy of hash table, remove two 'stratos' orders, dump both tables...
+
+Dump of ht:
+[0]:
+[1]:
+x101 (priority 12, mega car)
+x101 (priority 5, super car)
+x101 (priority 4, shack of cars)
+[2]:
+[3]:
+stratos (priority 15, super car)
+stratos (priority 7, car world)
+stratos (priority 8, shack of cars)
+[4]:
+[5]:
+challenger (priority 5, car world)
+challenger (priority 3, car joint)
+[6]:
+[7]:
+[8]:
+[9]:
+
+Dump of ht2:
+[0]:
+[1]:
+x101 (priority 12, mega car)
+x101 (priority 5, super car)
+x101 (priority 4, shack of cars)
+[2]:
+[3]:
+stratos (priority 7, car world)
+[4]:
+[5]:
+challenger (priority 5, car world)
+challenger (priority 3, car joint)
+[6]:
+[7]:
+[8]:
+[9]:
