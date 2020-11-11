@@ -20,12 +20,20 @@ It was challenging as this was the first time I had to implement a data structur
 <br>
 
 ## **Project 2: Splay Tree of AVL Trees**
-In progress
+This project was HARD. The concept is there are two main data structures, BookTree which is a splay tree, and WordTree which is an AVL tree. The BookTree object is the main tree structure containing all the AVL tree in its nodes. 
+
+The project was a test of will as the rotations in the AVL tree did not cooperate. I spent a lot of time breaking down the process and relearning it each time. I didn't complete the project on time and it was a very humbling experience to have a project of this magnitude. Will revisit and finish another day.
 
 <br>
 
-## **Project 3: Heaps**
+## **Project 3: ER Triage Prioritization Process**
+This project was much nicer compared to the previous two. The project was to make a priority queue from a skew heap data structure. Each node contained a Patient object with their respective information to determine their priority in the queue. 
+
+This project introduced to me the concept of function pointers. Though the concept is not difficult, it is strange to those that have not witnessed it before. I think though, I will stick to more lambdas over function pointers unless necessary. 
+
+The skew heap itself was not too challenging. The merges took some time to get right and make sure they end up in the correct order so that each insertion would result in O(logn) time. The most challenging part to me was when rebuilding the entire heap after changing the function pointer that determined the priority of each node. Overall the result was O(nlogn) restructures and O(logn) merges.
 
 <br>
 
-## **Project 4: Hash Table**
+## **Project 4: Hash Table of Heaps**
+In progress. Breaking for now after project3.

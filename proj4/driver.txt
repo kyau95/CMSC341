@@ -96,4 +96,8 @@ challenger (priority 3, car joint)
 [6]:
 [7]:
 [8]:
+<<<<<<< HEAD
 [9]:
+=======
+[9]:
+>>>>>>> 42375db83dad2aac2d7635daf9219b6074525ef1
