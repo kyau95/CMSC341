@@ -54,7 +54,8 @@ void PQueue::insertPatient(const Patient& input) {
     if (_heap) {
         Node* newNode = new Node(input);
         _heap = mergeAux(_heap, newNode);
-    } else {
+    } 
+    else {
         _heap = new Node(input);
     }
     ++_size;
@@ -79,7 +80,8 @@ Node* PQueue::mergeAux(Node* heap1, Node* heap2) {
 
     if (heap1->_right == nullptr) {  // tack on heap2
         heap1->_right = heap2;
-    } else {  // recursively tack on heap2
+    } 
+    else {  // recursively tack on heap2
         heap1->_right = mergeAux(heap1->_right, heap2);
     }
     temp = heap1->_right;
@@ -94,10 +96,12 @@ Patient PQueue::getNextPatient() {
     }
     // Set a temporary pointer to the current root
     // Merge the left and right subtrees of the heap
-    Node* oldRoot = _heap;
+    Patient patient = _heap->_patient;
+    Node* oldRoot = _heap; // <--- don't forget to delete otherwise mem leaks
     _heap = mergeAux(_heap->_left, _heap->_right);
+    delete oldRoot; 
     --_size;
-    return oldRoot->_patient;
+    return patient;
 }
 
 void PQueue::mergeWithQueue(PQueue& rhs) {
@@ -112,6 +116,7 @@ void PQueue::mergeWithQueue(PQueue& rhs) {
     // merged nodes and rhs._heap
     rhs._heap = nullptr;
     _size += rhs._size;
+    rhs._size = 0;
 }
 
 void PQueue::clear() {
@@ -152,19 +157,17 @@ prifn_t PQueue::getPriorityFn() const {
 }
 
 void PQueue::setPriorityFn(prifn_t priFn) {
-    // FIXME not rebuilding heap properly
-    // In case assigning the same priority function, just leave
-    if (priFn == priority) {
-        return;
-    }
     // Create empty PQueue for insertion
     PQueue newPQueue(priFn);
-
-    // Rebuild heap
-    newPQueue._heap = mergeAux(newPQueue._heap, _heap);
-    _heap = nullptr;
-    // Assign current PQueue = newPQueue after insertions
-    *this = newPQueue;
+    
+    // Insert all patients under new priority function rules
+    while (_size > 0) { // will destroy current _size, reassign it later
+        newPQueue.insertPatient(getNextPatient());
+    }
+    // Reassign all values and copy tree into heap
+    priority = priFn; 
+    _heap = copyHeap(newPQueue._heap);
+    _size = newPQueue._size;
 }
 
 void PQueue::dump() const {
