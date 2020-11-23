@@ -15,11 +15,10 @@
 #include <iostream>
 #include <string>
 
-using std::string;
 using std::ostream;
-class Car{
-    public:
-
+using std::string;
+class Car {
+public:
     // Constructor.  Default is a "plain" donut, priority 0, and empty
     // customer string.
     Car(string key = "x", unsigned pri = 0, string dealer = "") {
@@ -39,18 +38,19 @@ class Car{
     }
 
     // Overloaded insertion operator
-    friend ostream& operator<<(ostream& sout, const Car &d );
-    private:
-    string _key;         // car model
-    unsigned _pri;       // order priority (dealer performance)
-    string _dealer;      // dealer information
+    friend ostream& operator<<(ostream& sout, const Car& d);
+
+private:
+    string _key;     // car model
+    unsigned _pri;   // order priority (dealer performance)
+    string _dealer;  // dealer information
 };
 
 // Overloaded insertion operator.  Prints car type (key), priority,
 // and dealer information.
-ostream& operator<<(ostream& sout, const Car &d ) {
-  sout << d._key << " (priority " << d._pri << ", "
-       << d._dealer << ")";
-  return sout;
+ostream& operator<<(ostream& sout, const Car& d) {
+    sout << d._key << " (priority " << d._pri << ", "
+         << d._dealer << ")";
+    return sout;
 }
 #endif

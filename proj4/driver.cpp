@@ -6,7 +6,7 @@
 unsigned cyclic_hash16(string key);
 
 int main() {
-    // Create a vector of cars to insert in the hash table
+    // Create a vector of car  s to insert in the hash table
     vector<Car> cars;
     cars.push_back(Car("x101", 5, "super car"));
     cars.push_back(Car("x101", 12, "mega car"));

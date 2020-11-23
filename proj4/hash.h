@@ -17,6 +17,7 @@
 #define _HASH_H
 
 #include <string>
+
 #include "heap.h"
 
 using std::string;
@@ -30,49 +31,47 @@ class Grader;
 
 template <class T>
 class HashTable {
+    friend Grader;
 
-  friend Grader;
-  
- public:
-  // Constructor.  Requires table size and hash function.
-  HashTable(unsigned size, hash_fn hash);
+public:
+    // Constructor.  Requires table size and hash function.
+    HashTable(unsigned size, hash_fn hash);
 
-  // Destructor, copy, and assignment
-  ~HashTable();
-  HashTable(const HashTable<T>& ht);
-  const HashTable<T>& operator=(const HashTable<T>& ht);
+    // Destructor, copy, and assignment
+    ~HashTable();
+    HashTable(const HashTable<T>& ht);
+    const HashTable<T>& operator=(const HashTable<T>& ht);
 
-  // In-line functions
-  
-  // Table size; set by constructor
-  unsigned tableSize() const { return _N; }
-  // Number of entries in the table
-  unsigned numEntries() const { return _n; }
-  // Load factor
-  float lambda() const { return ((float) _n) / _N; }
+    // In-line functions
 
-  // Main hash table functions
-  
-  // insert returns 'true' if successful; 'false' otherwise
-  bool insert(const T& object);
-  // getNext retrieves **and removes** the highest priority order of
-  // type indicated by key.  It returns 'true' if successful; 'false'
-  // otherwise.
-  bool getNext(string key, T& obj);
+    // Table size; set by constructor
+    unsigned tableSize() const { return _N; }
+    // Number of entries in the table
+    unsigned numEntries() const { return _n; }
+    // Load factor
+    float lambda() const { return ((float)_n) / _N; }
 
-  // Dump the entire hash table
-  void dump() const;
-  
- private:
-  unsigned _N;       // hash table size
-  unsigned _n;       // current number of entries
-  hash_fn _hash;     // hash function
-  Heap<T> *_table;   // array of heaps
+    // Main hash table functions
 
-  // ***********************************************
-  // Private helper function declarations go here! *
-  // ***********************************************
-  
+    // insert returns 'true' if successful; 'false' otherwise
+    bool insert(const T& object);
+    // getNext retrieves **and removes** the highest priority order of
+    // type indicated by key.  It returns 'true' if successful; 'false'
+    // otherwise.
+    bool getNext(string key, T& obj);
+
+    // Dump the entire hash table
+    void dump() const;
+
+private:
+    unsigned _N;      // hash table size
+    unsigned _n;      // current number of entries
+    hash_fn _hash;    // hash function
+    Heap<T>* _table;  // array of heaps
+
+    // ***********************************************
+    // Private helper function declarations go here! *
+    // ***********************************************
 };
 
 // *****************************************

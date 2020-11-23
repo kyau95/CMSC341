@@ -21,7 +21,6 @@ int main() {
     Patient patient2("Liz", 5, 37, 98, 26, 70, 100);
     Patient patient3("Nick", 2, 37, 85, 34, 125, 85);
     Patient patient4("Eva", 4, 37, 95, 22, 115, 95);
-    
     queue1.insertPatient(patient3);
     queue1.insertPatient(patient1);
     queue1.insertPatient(patient2);

@@ -64,9 +64,10 @@ private:
     // *********************************************
     // Private helper function declarations go here!
     // *********************************************
-    
-    // Finds the next successor
-    int findNext() const;
+
+    // Helper to construct the heap
+    void heapify() {
+    }
 };
 
 // ***************************************
@@ -76,6 +77,9 @@ private:
 template <class T>
 void Heap<T>::insert(const T& object) {
     // TODO insert for vector/array based heap
+    if (_heap.empty()) {  // empty heap
+        _heap.push_back(object);
+    }
 }
 
 template <class T>
@@ -90,10 +94,4 @@ template <class T>
 void Heap<T>::removeTop() {
     
 }
-
-template <class T>
-int Heap<T>::findNext() const {
-    
-}
-
 #endif
