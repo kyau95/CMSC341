@@ -47,6 +47,7 @@ public:
         int index = hash(key) % capacity;
         buckets[index].push_back(bucket);
         ++size;
+        // REHASHING PART
         if (size / capacity > 0.9) {
             vector<Bucket>* anotherBucket = new vector<Bucket>[capacity * 2];
             for (int i = 0; i < buckets[index].size(); ++i) {
@@ -81,5 +82,10 @@ int main() {
     for (int i = 0; i < 4; ++i) {
         cout << "At key " << keys[i] << " the value is: " << ht.get(keys[i]) << endl;
     }
+    // int m = 3, n = 5, sum = 0;
+    // for (int i = 0; i <= n - m; ++i) {
+    //     sum += 1;
+    // }
+    // cout << sum << endl;
     return 0;
 }
